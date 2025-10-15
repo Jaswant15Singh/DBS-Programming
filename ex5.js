@@ -48,6 +48,7 @@ function getResult(input) {
     return `${error.message} : ${factors ? factors.join(" ") : ""}  ${
       multiples ? multiples.join(" ") : ""
     }`;
+    
   }
 }
 
