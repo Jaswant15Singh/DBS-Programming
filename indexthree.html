@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <shadow-dom id="shadow-dom"></shadow-dom>
+    <button id="changeText">Change text color</button>
+    <button id="originalText">Original text color</button>
+    <script>
+      class ShadowDomData extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({ mode: "open" });
+          shadow.innerHTML = `
+                <style>
+                    .main-container{
+                    background-color:aqua;
+                    border:1px solid black;
+                    height:400px;
+                    width:400px;
+                    }    
+
+                    .child-container{
+                       color:black; 
+                       font-weight:900;
+                    }
+
+                     .change-color{
+            color:red !important;
+        }
+                    
+                </style>
+                <div class='main-container'>
+                    <div class='child-container'>
+                          <p>This is coming from shadow dom</p>  
+                    </div>
+                </div>
+                `;
+        }
+      }
+
+      customElements.define("shadow-dom", ShadowDomData);
+      const shadowRoot = document.getElementById("shadow-dom");
+      const containerPara =
+        shadowRoot.shadowRoot.querySelector(".child-container p");
+      document.getElementById("changeText").addEventListener("click", (e) => {
+        containerPara.classList.add("change-color");
+      });
+      document.getElementById("originalText").addEventListener("click", (e) => {
+        containerPara.classList.remove("change-color");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      span {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <span>Hello this is normal span</span>
+
+    <div id="main-shadow"></div>
+
+    <script>
+      const host = document.getElementById("main-shadow");
+      const shadow = host.attachShadow({ mode: "open" });
+      const span = document.createElement("span");
+      span.innerHTML = `
+      <style>
+       span{
+         color:green;
+       }  
+      </style>
+      <span>
+        hello this is from shadow span
+      </span>
+      `;
+      shadow.appendChild(span);
+      console.log(host.shadowRoot);
+      
+    </script>
+  </body>
+</html>
